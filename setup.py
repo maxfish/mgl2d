@@ -11,8 +11,7 @@ setup(
         'Pillow == 4.1.1',
         'PyOpenGL == 3.1.0',
         'PySDL2 == 0.9.5',
-        # 'PyTMX == 3.20.17'
-        # Manual install a fork with fixes from git+https://github.com/maxfish/PyTMX.git#egg=PyTMX
+        'PyTMX == 3.21.1'
     ],
     packages=find_packages()
 )
