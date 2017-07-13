@@ -1,12 +1,16 @@
+import logging
+
 import numpy
 from OpenGL.GL import *
 from PIL import Image
+
+logger = logging.getLogger(__name__)
 
 
 class Texture(object):
     @classmethod
     def load_from_file(cls, filename, mode=GL_RGBA):
-        print('[Texture] Loading ''%s''' % filename)
+        logger.info('Loading ''%s''' % filename)
         image = Image.open(filename)
         if mode == GL_RGBA:
             image_new = image.convert('RGBA')

@@ -1,3 +1,5 @@
+import logging
+
 import numpy
 import sdl2
 from OpenGL.GL import *
@@ -5,6 +7,8 @@ from sdl2 import video
 
 from mgl2d.math.matrix4 import Matrix4
 from mgl2d.math.rect import Rect
+
+logger = logging.getLogger(__name__)
 
 
 class Screen(object):
@@ -96,6 +100,6 @@ class Screen(object):
         self._pp_steps.append(step)
 
     def print_info(self):
-        print('[Screen] %dx%d ratio: %.2f' % (self._width, self._height, self._aspect_ratio))
-        print('[Screen] Renderer: %s (%s)' % (glGetString(GL_RENDERER), glGetString(GL_VENDOR)))
-        print('[Screen] OpenGL: %s GLSL: %s' % (glGetString(GL_VERSION), glGetString(GL_SHADING_LANGUAGE_VERSION)))
+        logger.info('%dx%d ratio: %.2f' % (self._width, self._height, self._aspect_ratio))
+        logger.info('Rendeer: %s (%s)' % (glGetString(GL_RENDERER), glGetString(GL_VENDOR)))
+        logger.info('OpenGL: %s GLSL: %s' % (glGetString(GL_VERSION), glGetString(GL_SHADING_LANGUAGE_VERSION)))

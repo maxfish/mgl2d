@@ -1,6 +1,10 @@
+import logging
+
 from OpenGL.GL import *
 
 from mgl2d.graphics.texture import Texture
+
+logger = logging.getLogger(__name__)
 
 
 class FrameBuffer(object):
@@ -19,7 +23,7 @@ class FrameBuffer(object):
         self._texture = Texture.create_with_data(width, height, texture_id)
 
         if not glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE:
-            print('[FrameBuffer] error binding!')
+            logger.error('error binding!')
             exit()
 
         self._width = width

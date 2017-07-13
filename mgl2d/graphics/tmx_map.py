@@ -1,8 +1,12 @@
+import logging
+
 from pytmx import pytmx
 
 from mgl2d.graphics.quad_drawable import QuadDrawable
 from mgl2d.graphics.texture import Texture
 from mgl2d.math.vector2 import Vector2
+
+logger = logging.getLogger(__name__)
 
 
 class TMXMap(object):
@@ -15,7 +19,7 @@ class TMXMap(object):
     @staticmethod
     def _image_loader(filename, colorkey, **kwargs):
         if colorkey:
-            print('[TMXMap] error: colorkey not implemented')
+            logger.error('colorkey not implemented')
 
         image = Texture.load_from_file(filename)
 
@@ -26,13 +30,13 @@ class TMXMap(object):
                     y = image.height - y - h
                     tile = image.get_region(x, y, w, h)
                 except:
-                    print('[TMXMap] error: cannot get region %s of image', rect)
+                    logger.error('cannot get region %s of image', rect)
                     raise
             else:
                 tile = image
 
             if flags:
-                print('[TMXMap] error: tile flags are not implemented')
+                logger.error('tile flags are not implemented')
 
             return tile
 

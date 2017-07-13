@@ -1,10 +1,13 @@
 import json
+import logging
 import os
 from collections import OrderedDict
 
 from mgl2d.graphics.texture import Texture
 from mgl2d.math.rect import Rect
 from mgl2d.math.vector2 import Vector2
+
+logger = logging.getLogger(__name__)
 
 
 class FramesStore:
@@ -20,7 +23,7 @@ class FramesStore:
         self.animation_fps = self.DEFAULT_FPS
 
     def load(self, path, file_name):
-        print("[FramesStore] Loading '%s/%s'" % (path, file_name))
+        logger.info("Loading '%s/%s'" % (path, file_name))
 
         json_data = open(os.path.join(path, file_name))
         data = json.load(json_data)
