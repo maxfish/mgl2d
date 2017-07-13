@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 
 class Screen(object):
-    def __init__(self, width, height, title='Window', gl_major=4, gl_minor=1):
+    def __init__(self, width, height, title='Window', alpha_blending=True, gl_major=4, gl_minor=1):
         self._width = width
         self._height = height
         self._aspect_ratio = float(width) / float(height)
@@ -36,6 +36,10 @@ class Screen(object):
         video.SDL_GL_SetAttribute(video.SDL_GL_CONTEXT_PROFILE_MASK, video.SDL_GL_CONTEXT_PROFILE_CORE)
         self._context = sdl2.SDL_GL_CreateContext(self._window)
         self._projection_matrix = self._ortho_projection()
+
+        if alpha_blending:
+            glEnable(GL_BLEND)
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
 
         # Post processing steps
         self._pp_steps = []
