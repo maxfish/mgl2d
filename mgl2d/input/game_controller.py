@@ -1,7 +1,9 @@
 import array
-import os
+import logging
 
 import sdl2
+
+logger = logging.getLogger(__name__)
 
 
 class GameController(object):
@@ -31,13 +33,18 @@ class GameController(object):
         self._connected = False
         if not self._joysticks_initialized:
             sdl2.SDL_Init(sdl2.SDL_INIT_JOYSTICK)
-            path = os.path.dirname(os.path.realpath(__file__))
-            sdl2.SDL_GameControllerAddMappingsFromFile(str.encode('%s/gamecontrollerdb.txt' % path))
+            self._joysticks_initialized = True
 
         self._axis = array.array('i', (0 for i in range(0, self.MAX_AXIS)))
         self._button_pressed = array.array('i', (0 for i in range(0, self.MAX_BUTTONS)))
         self._button_released = array.array('i', (0 for i in range(0, self.MAX_BUTTONS)))
         self._button_down = array.array('i', (0 for i in range(0, self.MAX_BUTTONS)))
+
+    @classmethod
+    def load_database(cls, filename):
+        # Use a configurations DB file, e.g. https://github.com/gabomdq/SDL_GameControllerDB
+        num_entries = sdl2.SDL_GameControllerAddMappingsFromFile(str.encode(filename))
+        logger.info('Loaded %d joystick definitions' % num_entries)
 
     def is_connected(self):
         return self._connected
