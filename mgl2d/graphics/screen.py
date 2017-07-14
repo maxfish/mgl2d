@@ -82,11 +82,11 @@ class Screen(object):
         self._window = None
 
     def begin_update(self):
-        glClearColor(0.0, 0.0, 0.0, 1.0)
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-
         if len(self._pp_steps) > 0:
             self._pp_steps[0].fbo.bind()
+
+        glClearColor(0.0, 0.0, 0.0, 1.0)
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
     def end_update(self):
         if len(self._pp_steps) > 0:
