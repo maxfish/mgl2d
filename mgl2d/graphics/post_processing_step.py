@@ -3,7 +3,7 @@ from mgl2d.graphics.quad_drawable import QuadDrawable
 from mgl2d.math.vector2 import Vector2
 
 
-class PostprocessingStep(object):
+class PostProcessingStep(object):
     def __init__(self, width, height, flip_y=True):
         super().__init__()
 
