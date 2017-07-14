@@ -104,6 +104,6 @@ class Screen(object):
         self._pp_steps.append(step)
 
     def print_info(self):
-        logger.info('%dx%d ratio: %.2f' % (self._width, self._height, self._aspect_ratio))
+        logger.info('Resolution: %dx%d ratio: %.2f' % (self._width, self._height, self._aspect_ratio))
         logger.info('Rendeer: %s (%s)' % (glGetString(GL_RENDERER), glGetString(GL_VENDOR)))
         logger.info('OpenGL: %s GLSL: %s' % (glGetString(GL_VERSION), glGetString(GL_SHADING_LANGUAGE_VERSION)))
