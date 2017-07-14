@@ -15,7 +15,7 @@ screen.print_info()
 
 # Textured quad centered
 quad = QuadDrawable(400, 300, 200, 200)
-quad.texture = Texture.load_from_file('texture.png')
+quad.texture = Texture.load_from_file('data/texture.png')
 quad.anchor = Vector2(100, 100)
 
 
