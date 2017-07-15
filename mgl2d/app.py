@@ -34,3 +34,4 @@ class App(object):
     def stop(self):
         self._running = False
         self._screen.close()
+        sdl2.SDL_Quit()
