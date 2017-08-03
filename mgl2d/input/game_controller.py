@@ -7,8 +7,6 @@ logger = logging.getLogger(__name__)
 
 
 class GameController(object):
-    _joysticks_initialized = False
-
     MAX_AXIS = sdl2.SDL_CONTROLLER_AXIS_MAX
     MAX_BUTTONS = sdl2.SDL_CONTROLLER_BUTTON_MAX
 
@@ -31,23 +29,33 @@ class GameController(object):
 
     def __init__(self):
         self._connected = False
-        if not self._joysticks_initialized:
-            sdl2.SDL_Init(sdl2.SDL_INIT_JOYSTICK)
-            self._joysticks_initialized = True
-
         self._axis = array.array('i', (0 for i in range(0, self.MAX_AXIS)))
         self._button_pressed = array.array('i', (0 for i in range(0, self.MAX_BUTTONS)))
         self._button_released = array.array('i', (0 for i in range(0, self.MAX_BUTTONS)))
         self._button_down = array.array('i', (0 for i in range(0, self.MAX_BUTTONS)))
-
-    @classmethod
-    def load_database(cls, filename):
-        # Use a configurations DB file, e.g. https://github.com/gabomdq/SDL_GameControllerDB
-        num_entries = sdl2.SDL_GameControllerAddMappingsFromFile(str.encode(filename))
-        logger.info('Loaded %d joystick definitions' % num_entries)
+        self._controller_name = '<not initialized>'
+        self._num_axis = 0
+        self._num_buttons = 0
+        self._num_balls = 0
 
     def is_connected(self):
         return self._connected
+
+    @property
+    def name(self):
+        return self._controller_name
+
+    @property
+    def num_axis(self):
+        return self._num_axis
+
+    @property
+    def num_buttons(self):
+        return self._num_buttons
+
+    @property
+    def num_balls(self):
+        return self._num_balls
 
     def is_button_pressed(self, button_id):
         if not self._connected:
