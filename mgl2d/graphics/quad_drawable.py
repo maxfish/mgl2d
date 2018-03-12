@@ -63,7 +63,7 @@ class QuadDrawable(Drawable):
             self._shader.set_uniform_matrix4('projection', screen.projection_matrix.m)
 
         glBindVertexArray(self._vao)
-        glDrawArrays(GL_TRIANGLES, 0, len(self._vertices / 3))
+        glDrawArrays(GL_TRIANGLES, 0, len(self._vertices))
         glBindVertexArray(0)
 
         if self._texture is not None:
