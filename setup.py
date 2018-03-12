@@ -10,7 +10,7 @@ setup(
         'numpy == 1.13.0',
         'Pillow == 4.1.1',
         'PyOpenGL == 3.1.0',
-        'PySDL2 == 0.9.5',
+        'PySDL2 == 0.9.6',
         'PyTMX == 3.21.1'
     ],
     packages=find_packages()
