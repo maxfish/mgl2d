@@ -54,3 +54,6 @@ class JoystickController(GameController):
 
     def get_axis_digital_value(self, axis_name):
         pass
+
+    def to_string(self):
+        return f'[\'{self._controller_name}\',axis:{self._num_axis},btns:{self._num_buttons}]'
