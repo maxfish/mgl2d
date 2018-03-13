@@ -53,6 +53,10 @@ class Screen(object):
         return self._height
 
     @property
+    def viewport(self):
+        return self._viewport
+
+    @property
     def is_opened(self):
         return self._window is not None
 
