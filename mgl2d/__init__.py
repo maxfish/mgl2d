@@ -1,4 +1,4 @@
-__version__ = (0, 1, 2)
+__version__ = (0, 1, 3)
 __author__ = 'maxfish'
 __author_email__ = 'massimiliano.pesce@gmail.com'
 __description__ = 'Modern OpenGL 2D game library'
