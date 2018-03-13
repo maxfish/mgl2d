@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='mgl2d',
-    version='0.1.3',
+    version='0.1.4',
     description='Simple 2D game library // PySDL2 + modern OpenGL',
     author='maxfish',
     url='https://github.com/maxfish/mgl2d',

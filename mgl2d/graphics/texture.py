@@ -8,11 +8,39 @@ logger = logging.getLogger(__name__)
 
 
 class Texture(object):
+    # @classmethod
+    # def load_from_file(cls, filename, mode=GL_RGBA):
+    #     logger.debug('Loading ''%s''' % filename)
+    #     image = Image.open(filename)
+    #     if mode == GL_RGBA:
+    #         image_new = image.convert('RGBA')
+    #         image.close()
+    #         image = image_new
+    #
+    #     texture = Texture()
+    #     texture._width = image.size[0]
+    #     texture._height = image.size[1]
+    #
+    #     pixels = numpy.array([component for pixel in image.getdata() for component in pixel], dtype=numpy.uint8)
+    #     texture.texture_id = glGenTextures(1)
+    #     glBindTexture(GL_TEXTURE_2D, texture.texture_id)
+    #
+    #     glTexParameter(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE)
+    #     glTexParameter(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE)
+    #     glTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+    #     glTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
+    #     glTexImage2D(GL_TEXTURE_2D, 0, mode, texture.width, texture.height, 0, mode, GL_UNSIGNED_BYTE, pixels)
+    #     glBindTexture(GL_TEXTURE_2D, 0)
+    #
+    #     image.close()
+    #     return texture
+
     @classmethod
     def load_from_file(cls, filename, mode=GL_RGBA):
-        logger.debug('Loading ''%s''' % filename)
         image = Image.open(filename)
-        if mode == GL_RGBA:
+        logger.debug(f'Loading \'{filename}\' mode:{image.mode}')
+
+        if mode == GL_RGBA and image.mode != 'RGBA':
             image_new = image.convert('RGBA')
             image.close()
             image = image_new
@@ -20,8 +48,8 @@ class Texture(object):
         texture = Texture()
         texture._width = image.size[0]
         texture._height = image.size[1]
+        pixels = image.tobytes("raw", "RGBA", 0, 1)
 
-        pixels = numpy.array([component for pixel in image.getdata() for component in pixel], dtype=numpy.uint8)
         texture.texture_id = glGenTextures(1)
         glBindTexture(GL_TEXTURE_2D, texture.texture_id)
 
