@@ -46,7 +46,7 @@ class KeyboardController(GameController):
 
             self._button_down[btn_index] = is_down
 
-    def get_axis(self, axis_name):
+    def get_axis(self, axis_index):
         return None
 
     def get_axis_digital_value(self, axis_name):

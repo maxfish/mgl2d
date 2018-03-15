@@ -48,6 +48,8 @@ class Vector2(object):
     def __div__(self, value):
         return Vector2(self.x / value, self.y / value)
 
+    __truediv__ = __div__
+
     def __mul__(self, value):
         return Vector2(self.x * value, self.y * value)
 

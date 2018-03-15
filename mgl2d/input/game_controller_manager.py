@@ -18,6 +18,7 @@ class GameControllerManager:
             self._joysticks_initialized = True
 
         self._num_joysticks = sdl2.joystick.SDL_NumJoysticks()
+        logger.info('Found %d connected joystick[s]' % self._num_joysticks)
         self._instances = [None] * (self._num_joysticks + (1 if allow_keyboard else 0))
 
     @property
@@ -34,6 +35,7 @@ class GameControllerManager:
             if self._instances[index] is None:
                 controller = JoystickController()
                 controller.open(index)
+                logger.info('Got joystick \'%s\'' % controller.to_string())
                 self._instances[index] = controller
                 return controller
 

@@ -1,8 +1,10 @@
 import ctypes
+import logging
 
 import sdl2
 
 DEFAULT_FPS = 50
+logger = logging.getLogger(__name__)
 
 
 class App(object):
@@ -12,6 +14,9 @@ class App(object):
         self._screen = None
         self._fps = DEFAULT_FPS
         self._frame_time_ms = 1000 / DEFAULT_FPS
+        logger.info(
+            f'SDL v{sdl2.SDL_MAJOR_VERSION}.{sdl2.SDL_MINOR_VERSION}.{sdl2.SDL_PATCHLEVEL} | PySDL v{sdl2.__version__}'
+        )
 
     def run(self, screen, draw_func, update_func, fps=DEFAULT_FPS):
         self._screen = screen

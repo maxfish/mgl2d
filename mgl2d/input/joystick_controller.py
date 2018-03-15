@@ -49,8 +49,19 @@ class JoystickController(GameController):
 
             self._button_down[btn_index] = is_down
 
-    def get_axis(self, axis_name):
-        pass
+    def get_axis(self, axis_index):
+        axis_value = sdl2.SDL_GameControllerGetAxis(self._sdl_controller, axis_index)
+
+        # Sticks have a dead zone
+        if axis_index != self.AXIS_TRIGGER_LEFT and axis_index != self.AXIS_TRIGGER_RIGHT:
+            if abs(axis_value) < self.AXIS_DEAD_ZONE:
+                return 0
+
+        # Return scaled value
+        return axis_value / self.AXIS_MAX_VALUE if axis_value > 0 else -axis_value / self.AXIS_MIN_VALUE
 
     def get_axis_digital_value(self, axis_name):
-        pass
+        return 0
+
+    def to_string(self):
+        return f'[\'{self._controller_name}\',axis:{self._num_axis},btns:{self._num_buttons}]'

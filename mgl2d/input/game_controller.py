@@ -1,15 +1,14 @@
 import array
-import logging
 
+import logging
 import sdl2
 
 logger = logging.getLogger(__name__)
 
 
 class GameController(object):
-    MAX_AXIS = sdl2.SDL_CONTROLLER_AXIS_MAX
+    # BUTTONS
     MAX_BUTTONS = sdl2.SDL_CONTROLLER_BUTTON_MAX
-
     BUTTON_INVALID = sdl2.SDL_CONTROLLER_BUTTON_INVALID
     BUTTON_A = sdl2.SDL_CONTROLLER_BUTTON_A
     BUTTON_B = sdl2.SDL_CONTROLLER_BUTTON_B
@@ -26,6 +25,18 @@ class GameController(object):
     BUTTON_DPAD_DOWN = sdl2.SDL_CONTROLLER_BUTTON_DPAD_DOWN
     BUTTON_DPAD_LEFT = sdl2.SDL_CONTROLLER_BUTTON_DPAD_LEFT
     BUTTON_DPAD_RIGHT = sdl2.SDL_CONTROLLER_BUTTON_DPAD_RIGHT
+
+    # AXIS
+    MAX_AXIS = sdl2.SDL_CONTROLLER_AXIS_MAX
+    AXIS_DEAD_ZONE = 4000
+    AXIS_MIN_VALUE = -32768
+    AXIS_MAX_VALUE = 32767
+    AXIS_LEFT_X = sdl2.SDL_CONTROLLER_AXIS_LEFTX
+    AXIS_LEFT_Y = sdl2.SDL_CONTROLLER_AXIS_LEFTY
+    AXIS_RIGHT_X = sdl2.SDL_CONTROLLER_AXIS_RIGHTX
+    AXIS_RIGHT_Y = sdl2.SDL_CONTROLLER_AXIS_RIGHTY
+    AXIS_TRIGGER_LEFT = sdl2.SDL_CONTROLLER_AXIS_TRIGGERLEFT
+    AXIS_TRIGGER_RIGHT = sdl2.SDL_CONTROLLER_AXIS_TRIGGERRIGHT
 
     def __init__(self):
         self._connected = False
@@ -81,7 +92,7 @@ class GameController(object):
     def update(self):
         raise NotImplementedError('This method has to be implemented by the subclass')
 
-    def get_axis(self, axis_name):
+    def get_axis(self, axis_index):
         raise NotImplementedError('This method has to be implemented by the subclass')
 
     def get_axis_digital_value(self, axis_name):
