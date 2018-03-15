@@ -10,9 +10,10 @@ logger = logging.getLogger(__name__)
 class Texture(object):
     @classmethod
     def load_from_file(cls, filename, mode=GL_RGBA):
-        logger.info('Loading ''%s''' % filename)
         image = Image.open(filename)
-        if mode == GL_RGBA:
+        # logger.info(f'Loading \'{filename}\' mode:{image.mode}')
+
+        if mode == GL_RGBA and image.mode != 'RGBA':
             image_new = image.convert('RGBA')
             image.close()
             image = image_new
@@ -21,7 +22,11 @@ class Texture(object):
         texture._width = image.size[0]
         texture._height = image.size[1]
 
-        pixels = numpy.array([component for pixel in image.getdata() for component in pixel], dtype=numpy.uint8)
+        # pixels = numpy.array([component for pixel in image.getdata() for component in pixel], dtype=numpy.uint8)
+        # mode_to_num_bytes = {'P': 1, 'RGB': 3, 'RGBA': 4}
+        # numpy.array(image.getdata(), numpy.uint8).reshape(image.size[1], image.size[0], mode_to_num_bytes[image.mode])
+        pixels = image.tobytes("raw", "RGBA", 0, 1)
+
         texture.texture_id = glGenTextures(1)
         glBindTexture(GL_TEXTURE_2D, texture.texture_id)
 
