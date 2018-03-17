@@ -7,12 +7,30 @@ class Rect(object):
         self.w = w
         self.h = h
 
+    @classmethod
+    def from_rect(cls, rect):
+        return Rect(rect.x, rect.y, rect.w, rect.h)
+
     def move_ip(self, amount_x, amount_y):
         self.x += amount_x
         self.y += amount_y
 
     def move(self, amount_x, amount_y):
         return Rect(self.x + amount_x, self.y + amount_y, self.w, self.h)
+
+    def erode(self, amount, centered=True):
+        if centered:
+            self.x += amount
+            self.y += amount
+        self.w -= amount * 2
+        self.h -= amount * 2
+
+    def expand(self, amount, centered=True):
+        if centered:
+            self.x -= amount
+            self.y -= amount
+        self.w += amount * 2
+        self.h += amount * 2
 
     def intersect_rect(self, rect):
         return not (self.left > rect.right
