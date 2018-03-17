@@ -54,25 +54,33 @@ class Rect(object):
         return Rect(self.x, self.y, self.w, self.h)
 
     @property
-    def top(self): return self.y
+    def top(self):
+        return self.y
 
     @property
-    def bottom(self): return self.y + self.h
+    def bottom(self):
+        return self.y + self.h
 
     @property
-    def left(self): return self.x
+    def left(self):
+        return self.x
 
     @property
-    def right(self): return self.x + self.w
+    def right(self):
+        return self.x + self.w
 
     @property
-    def width(self): return self.w
+    def width(self):
+        return self.w
 
     @property
-    def height(self): return self.h
+    def height(self):
+        return self.h
 
     @property
-    def center_x(self): return self.x + self.w / 2
+    def center_x(self):
+        return self.x + self.w / 2
 
     @property
-    def center_y(self): return self.y + self.h / 2
+    def center_y(self):
+        return self.y + self.h / 2

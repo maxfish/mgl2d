@@ -5,8 +5,8 @@ import sdl2
 from OpenGL.GL import *
 from sdl2 import video
 
+from mgl2d.math import Rect
 from mgl2d.math.matrix4 import Matrix4
-from mgl2d.math.rect import Rect
 
 logger = logging.getLogger(__name__)
 

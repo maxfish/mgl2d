@@ -1,6 +1,6 @@
 import array
-
 import logging
+
 import sdl2
 
 logger = logging.getLogger(__name__)

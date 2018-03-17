@@ -2,7 +2,7 @@ import logging
 
 from OpenGL.GL import *
 
-from mgl2d.graphics.texture import Texture
+from mgl2d.graphics import Texture
 
 logger = logging.getLogger(__name__)
 

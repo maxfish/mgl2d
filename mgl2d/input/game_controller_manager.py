@@ -1,8 +1,9 @@
 import logging
 
 import sdl2
-from mgl2d.input.joystick_controller import JoystickController
-from mgl2d.input.keyboard_controller import KeyboardController
+
+from mgl2d.input import JoystickController
+from mgl2d.input import KeyboardController
 
 logger = logging.getLogger(__name__)
 

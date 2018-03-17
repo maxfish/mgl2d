@@ -3,7 +3,8 @@ import logging
 import numpy
 from OpenGL.GL import *
 from PIL import Image
-from mgl2d.math.vector2 import Vector2
+
+from mgl2d.math import Vector2
 
 logger = logging.getLogger(__name__)
 
