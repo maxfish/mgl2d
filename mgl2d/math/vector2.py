@@ -8,6 +8,10 @@ class Vector2(object):
         self.x = x
         self.y = y
 
+    @classmethod
+    def from_vector(cls, vector):
+        return Vector2(vector.x, vector.y)
+
     def length(self):
         return math.hypot(self.x, self.y)
 
@@ -27,8 +31,17 @@ class Vector2(object):
     def dot(self, vector):
         return Vector2(self.x * vector.x, self.y * vector.y)
 
+    def copy(self):
+        return Vector2(self.x, self.y)
+
     def to_list(self):
         return [self.x, self.y]
+
+    def to_tuple(self):
+        return self.x, self.y
+
+    def to_string(self):
+        return f'{self.x}, {self.y}'
 
     def __eq__(self, vector):
         return self.x == vector.x and self.y == vector.y
