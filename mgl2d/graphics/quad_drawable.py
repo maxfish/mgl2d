@@ -44,11 +44,17 @@ class QuadDrawable(Drawable):
         return self._anchor
 
     @anchor.setter
-    def anchor(self, value):
-        self._anchor = value
+    def anchor(self, vector2):
+        self._anchor = vector2
         # Because of the matrices order, the anchor has to be scaled by scale
         self._m_anchor = Matrix4.translate(-self._anchor.x / self.scale.x, -self._anchor.y / self.scale.y, 0)
         self._is_transform_invalid = True
+
+    def anchor_to_center(self):
+        self.anchor = self.scale / 2
+
+    def scale_to_texture_size(self):
+        self.scale = self.texture.size
 
     def _compute_transform(self):
         self._m_transform = self._m_translation * self._m_rotation * self._m_scale * self._m_anchor
