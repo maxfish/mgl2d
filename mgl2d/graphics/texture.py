@@ -3,6 +3,7 @@ import logging
 import numpy
 from OpenGL.GL import *
 from PIL import Image
+from mgl2d.math.vector2 import Vector2
 
 logger = logging.getLogger(__name__)
 
@@ -11,7 +12,7 @@ class Texture(object):
     @classmethod
     def load_from_file(cls, filename, mode=GL_RGBA):
         image = Image.open(filename)
-        # logger.info(f'Loading \'{filename}\' mode:{image.mode}')
+        logger.debug(f'Loading \'{filename}\' mode:{image.mode}')
 
         if mode == GL_RGBA and image.mode != 'RGBA':
             image_new = image.convert('RGBA')
@@ -19,8 +20,8 @@ class Texture(object):
             image = image_new
 
         texture = Texture()
-        texture._width = image.size[0]
-        texture._height = image.size[1]
+        texture._size.x = image.size[0]
+        texture._size.y = image.size[1]
 
         # pixels = numpy.array([component for pixel in image.getdata() for component in pixel], dtype=numpy.uint8)
         # mode_to_num_bytes = {'P': 1, 'RGB': 3, 'RGBA': 4}
@@ -46,8 +47,8 @@ class Texture(object):
         pixels = numpy.array([component for pixel in image.getdata() for component in pixel], dtype=numpy.uint8)
 
         texture = Texture()
-        texture._width = width
-        texture._height = height
+        texture._size.x = width
+        texture._size.y = height
         texture.texture_id = glGenTextures(1)
         glBindTexture(GL_TEXTURE_2D, texture.texture_id)
 
@@ -64,14 +65,13 @@ class Texture(object):
     @classmethod
     def create_with_data(cls, width, height, texture_id):
         texture = Texture()
-        texture._width = width
-        texture._height = height
+        texture._size.x = width
+        texture._size.y = height
         texture.texture_id = texture_id
         return texture
 
     def __init__(self):
-        self._width = 0
-        self._height = 0
+        self._size = Vector2()
         self.texture_id = 0
 
     def bind(self):
@@ -82,11 +82,15 @@ class Texture(object):
 
     @property
     def width(self):
-        return self._width
+        return self._size.x
 
     @property
     def height(self):
-        return self._height
+        return self._size.y
+
+    @property
+    def size(self):
+        return self._size
 
     def _next_power_of_two(self, n):
         return 2 ** (n - 1).bit_length()
