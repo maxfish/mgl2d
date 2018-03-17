@@ -7,8 +7,7 @@ MGL2D is licensed under the terms of the MIT License.
 See LICENSE for details of the usage license granted to you for this code.
 
 
-HIGHLIGHTS
-==========
+## HIGHLIGHTS
 
 * Super easy setup
 * It uses PyOpenGL and SDL2
@@ -18,18 +17,10 @@ HIGHLIGHTS
 * Basic shader support
 * Input handling: keyboard and joysticks (via SDL2)
 
+## INSTALL
+`pip install mgl2d`
 
-LATEST SOURCE
-=============
-
-MGL2D is hosted on Github (https://github.com/maxfish/mgl2d). You can check out the latest version of the source code with Git:
-```
-git clone https://github.com/maxfish/mgl2d.git mgl2d
-```
-
-
-DEPENDENCIES
-============
+## DEPENDENCIES
 
 ```
 SDL 2.0 (www.libsdl.org)
@@ -39,8 +30,14 @@ PyTMX (https://github.com/bitcraft/PyTMX)
 Pillow
 ```
 
+## LATEST SOURCE
 
-NOTES
-=====
+MGL2D is hosted on Github (https://github.com/maxfish/mgl2d). You can check out the latest version of the source code with Git:
+```
+git clone https://github.com/maxfish/mgl2d.git mgl2d
+```
 
-The library is being developed and tested on MacOS.
+
+### NOTES
+
+The library has been developed and tested on MacOS.
