@@ -1,5 +1,5 @@
-from mgl2d.graphics import FramesStore
-from mgl2d.graphics import QuadDrawable
+from mgl2d.graphics.frames_store import FramesStore
+from mgl2d.graphics.quad_drawable import QuadDrawable
 from mgl2d.math.vector2 import Vector2
 
 

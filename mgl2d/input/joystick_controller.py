@@ -1,6 +1,6 @@
 import sdl2
 
-from mgl2d.input import GameController
+from mgl2d.input.game_controller import GameController
 
 
 class JoystickController(GameController):

@@ -2,8 +2,8 @@ import logging
 
 from pytmx import pytmx
 
-from mgl2d.graphics import QuadDrawable
-from mgl2d.graphics import Texture
+from mgl2d.graphics.quad_drawable import QuadDrawable
+from mgl2d.graphics.texture import Texture
 from mgl2d.math.vector2 import Vector2
 
 logger = logging.getLogger(__name__)

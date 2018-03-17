@@ -1,8 +1,8 @@
 import numpy as np
 from OpenGL.GL import *
 
-from mgl2d.graphics import Drawable
-from mgl2d.graphics import Shader
+from mgl2d.graphics.drawable import Drawable
+from mgl2d.graphics.shader import Shader
 from mgl2d.math.matrix4 import Matrix4
 from mgl2d.math.vector2 import Vector2
 

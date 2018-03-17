@@ -20,7 +20,7 @@ LONGDESCRIPTION = 'See the README.md file on GitHub for more information.'
 URL = 'https://github.com/maxfish/mgl2d'
 EMAIL = 'massimiliano.pesce@gmail.com'
 AUTHOR = 'Massimiliano Pesce'
-VERSION = '0.9.0'
+VERSION = '0.9.1'
 
 # What packages are required for this module to be executed?
 REQUIRED = [

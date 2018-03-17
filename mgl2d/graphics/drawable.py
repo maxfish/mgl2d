@@ -1,5 +1,5 @@
-from mgl2d.math import Matrix4
-from mgl2d.math import Vector2
+from mgl2d.math.matrix4 import Matrix4
+from mgl2d.math.vector2 import Vector2
 
 
 class Drawable:
