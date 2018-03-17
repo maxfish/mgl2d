@@ -12,11 +12,12 @@ logger = logging.getLogger(__name__)
 
 
 class Screen(object):
-    def __init__(self, width, height, title='Window', alpha_blending=True, gl_major=4, gl_minor=1):
+    def __init__(self, width, height, title='Window', alpha_blending=True, full_screen=False, gl_major=4, gl_minor=1):
         self._width = width
         self._height = height
         self._aspect_ratio = float(width) / float(height)
         self._viewport = Rect(0, 0, width, height)
+        self._full_screen = full_screen
 
         # Create the window
         if sdl2.SDL_Init(sdl2.SDL_INIT_VIDEO) != 0:
@@ -26,6 +27,7 @@ class Screen(object):
                                              sdl2.SDL_WINDOWPOS_UNDEFINED,
                                              sdl2.SDL_WINDOWPOS_UNDEFINED, width, height,
                                              sdl2.SDL_WINDOW_OPENGL)
+
         if not self._window:
             print(sdl2.SDL_GetError())
             return
@@ -40,6 +42,9 @@ class Screen(object):
         if alpha_blending:
             glEnable(GL_BLEND)
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+
+        if full_screen:
+            self.full_screen = True
 
         # Post processing steps
         self._pp_steps = []
@@ -63,6 +68,14 @@ class Screen(object):
     @property
     def projection_matrix(self):
         return self._projection_matrix
+
+    @property
+    def full_screen(self):
+        return self._full_screen
+
+    @full_screen.setter
+    def full_screen(self, value):
+        sdl2.SDL_SetWindowFullscreen(self._window, value)
 
     def _ortho_projection(self):
         z_far = 1.0
