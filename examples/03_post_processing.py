@@ -12,7 +12,7 @@ from mgl2d.math.vector2 import Vector2
 logging.basicConfig(level=logging.INFO)
 
 app = App()
-screen = Screen(800, 600, 'Quad drawable')
+screen = Screen(800, 600, 'Post processing')
 screen.print_info()
 
 # Textured quad centered
@@ -21,9 +21,11 @@ quad.texture = Texture.load_from_file('data/texture.png')
 quad.anchor = Vector2(100, 100)
 
 # A couple of simple postprocessing steps
+# 1. makes the graphics gray
 step1 = PostProcessingStep(screen.width, screen.height)
 step1.drawable.shader = Shader.from_files('data/base.vert', 'data/grayscale.frag')
 screen.add_postprocessing_step(step1)
+# 2. apply an old-style scan line effect
 step2 = PostProcessingStep(screen.width, screen.height)
 step2.drawable.shader = Shader.from_files('data/base.vert', 'data/scanline.frag')
 screen.add_postprocessing_step(step2)
