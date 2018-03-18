@@ -9,7 +9,7 @@ class PostProcessingStep(object):
 
         self._fbo = FrameBuffer(width, height)
         self._drawable = QuadDrawable()
-        self._drawable.scale = Vector2(width, height)
+        self._drawable.size = Vector2(width, height)
         self._drawable.flip_y = flip_y
         self._drawable.pos = Vector2(0, height)
         self._drawable.invalidate_matrices()
