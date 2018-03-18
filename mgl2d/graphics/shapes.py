@@ -18,6 +18,11 @@ class Shapes:
         glDrawArrays(GL_LINES, 0, 2)
         glBindVertexArray(0)
 
+    def draw_polygon(self, screen, vertices, color):
+        for i in range(0, len(vertices)):
+            self.draw_line(screen, int(vertices[i][0]), int(vertices[i][1]), int(vertices[(i + 1) % len(vertices)][0]),
+                           int(vertices[(i + 1) % len(vertices)][1]), color)
+
     def _setup_lines(self):
         self._lines_vao = glGenVertexArrays(1)
         glBindVertexArray(self._lines_vao)
