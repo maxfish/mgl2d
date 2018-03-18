@@ -17,20 +17,17 @@ class GameController(object):
     BUTTON_BACK = sdl2.SDL_CONTROLLER_BUTTON_BACK
     BUTTON_GUIDE = sdl2.SDL_CONTROLLER_BUTTON_GUIDE
     BUTTON_START = sdl2.SDL_CONTROLLER_BUTTON_START
-    BUTTON_LEFTSTICK = sdl2.SDL_CONTROLLER_BUTTON_LEFTSTICK
-    BUTTON_RIGHTSTICK = sdl2.SDL_CONTROLLER_BUTTON_RIGHTSTICK
-    BUTTON_LEFTSHOULDER = sdl2.SDL_CONTROLLER_BUTTON_LEFTSHOULDER
-    BUTTON_RIGHTSHOULDER = sdl2.SDL_CONTROLLER_BUTTON_RIGHTSHOULDER
-    BUTTON_DPAD_UP = sdl2.SDL_CONTROLLER_BUTTON_DPAD_UP
-    BUTTON_DPAD_DOWN = sdl2.SDL_CONTROLLER_BUTTON_DPAD_DOWN
-    BUTTON_DPAD_LEFT = sdl2.SDL_CONTROLLER_BUTTON_DPAD_LEFT
-    BUTTON_DPAD_RIGHT = sdl2.SDL_CONTROLLER_BUTTON_DPAD_RIGHT
+    BUTTON_LEFT_STICK = sdl2.SDL_CONTROLLER_BUTTON_LEFTSTICK
+    BUTTON_RIGHT_STICK = sdl2.SDL_CONTROLLER_BUTTON_RIGHTSTICK
+    BUTTON_LEFT_SHOULDER = sdl2.SDL_CONTROLLER_BUTTON_LEFTSHOULDER
+    BUTTON_RIGHT_SHOULDER = sdl2.SDL_CONTROLLER_BUTTON_RIGHTSHOULDER
+    BUTTON_DIR_PAD_UP = sdl2.SDL_CONTROLLER_BUTTON_DPAD_UP
+    BUTTON_DIR_PAD_DOWN = sdl2.SDL_CONTROLLER_BUTTON_DPAD_DOWN
+    BUTTON_DIR_PAD_LEFT = sdl2.SDL_CONTROLLER_BUTTON_DPAD_LEFT
+    BUTTON_DIR_PAD_RIGHT = sdl2.SDL_CONTROLLER_BUTTON_DPAD_RIGHT
 
     # AXIS
     MAX_AXIS = sdl2.SDL_CONTROLLER_AXIS_MAX
-    AXIS_DEAD_ZONE = 4000
-    AXIS_MIN_VALUE = -32768
-    AXIS_MAX_VALUE = 32767
     AXIS_LEFT_X = sdl2.SDL_CONTROLLER_AXIS_LEFTX
     AXIS_LEFT_Y = sdl2.SDL_CONTROLLER_AXIS_LEFTY
     AXIS_RIGHT_X = sdl2.SDL_CONTROLLER_AXIS_RIGHTX
@@ -40,10 +37,10 @@ class GameController(object):
 
     def __init__(self):
         self._connected = False
-        self._axis = array.array('i', (0 for i in range(0, self.MAX_AXIS)))
-        self._button_pressed = array.array('i', (0 for i in range(0, self.MAX_BUTTONS)))
-        self._button_released = array.array('i', (0 for i in range(0, self.MAX_BUTTONS)))
-        self._button_down = array.array('i', (0 for i in range(0, self.MAX_BUTTONS)))
+        self._axis = array.array('i', (0 for _ in range(0, self.MAX_AXIS)))
+        self._button_pressed = array.array('i', (0 for _ in range(0, self.MAX_BUTTONS)))
+        self._button_released = array.array('i', (0 for _ in range(0, self.MAX_BUTTONS)))
+        self._button_down = array.array('i', (0 for _ in range(0, self.MAX_BUTTONS)))
         self._controller_name = '<not initialized>'
         self._num_axis = 0
         self._num_buttons = 0

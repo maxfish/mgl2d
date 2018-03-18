@@ -5,6 +5,9 @@ from mgl2d.input.game_controller import GameController
 
 class JoystickController(GameController):
     _DEBUG_CONTROLLER = False
+    AXIS_DEAD_ZONE = 4000
+    AXIS_MIN_VALUE = -32768
+    AXIS_MAX_VALUE = 32767
 
     def __init__(self):
         super().__init__()
@@ -35,6 +38,7 @@ class JoystickController(GameController):
         self._sdl_controller = None
         self._sdl_joystick = None
         self._sdl_joystick_id = None
+        self._connected = False
 
     def update(self):
         if not self._connected:
@@ -61,7 +65,8 @@ class JoystickController(GameController):
         return axis_value / self.AXIS_MAX_VALUE if axis_value > 0 else -axis_value / self.AXIS_MIN_VALUE
 
     def get_axis_digital_value(self, axis_name):
+        # Not implemented
         return 0
 
     def to_string(self):
-        return f'[\'{self._controller_name}\',axis:{self._num_axis},btns:{self._num_buttons}]'
+        return f'[\'{self._controller_name}\',axis:{self._num_axis},buttons:{self._num_buttons}]'

@@ -17,17 +17,17 @@ class KeyboardController(GameController):
             self.BUTTON_B: sdl2.SDL_SCANCODE_S,
             self.BUTTON_X: sdl2.SDL_SCANCODE_D,
             self.BUTTON_Y: sdl2.SDL_SCANCODE_F,
-            self.BUTTON_DPAD_UP: sdl2.SDL_SCANCODE_UP,
-            self.BUTTON_DPAD_DOWN: sdl2.SDL_SCANCODE_DOWN,
-            self.BUTTON_DPAD_LEFT: sdl2.SDL_SCANCODE_LEFT,
-            self.BUTTON_DPAD_RIGHT: sdl2.SDL_SCANCODE_RIGHT,
+            self.BUTTON_DIR_PAD_UP: sdl2.SDL_SCANCODE_UP,
+            self.BUTTON_DIR_PAD_DOWN: sdl2.SDL_SCANCODE_DOWN,
+            self.BUTTON_DIR_PAD_LEFT: sdl2.SDL_SCANCODE_LEFT,
+            self.BUTTON_DIR_PAD_RIGHT: sdl2.SDL_SCANCODE_RIGHT,
             self.BUTTON_BACK: 0,
             self.BUTTON_GUIDE: 0,
             self.BUTTON_START: 0,
-            self.BUTTON_LEFTSTICK: 0,
-            self.BUTTON_RIGHTSTICK: 0,
-            self.BUTTON_LEFTSHOULDER: 0,
-            self.BUTTON_RIGHTSHOULDER: 0,
+            self.BUTTON_LEFT_STICK: 0,
+            self.BUTTON_RIGHT_STICK: 0,
+            self.BUTTON_LEFT_SHOULDER: 0,
+            self.BUTTON_RIGHT_SHOULDER: 0,
         }
 
     def open(self, device_index):
@@ -37,11 +37,11 @@ class KeyboardController(GameController):
         pass
 
     def update(self):
-        keystatus = sdl2.SDL_GetKeyboardState(None)
+        key_status = sdl2.SDL_GetKeyboardState(None)
         for btn_index in range(0, self.MAX_BUTTONS):
             self._button_pressed[btn_index] = 0
 
-            is_down = keystatus[self._button_mapping[btn_index]]
+            is_down = key_status[self._button_mapping[btn_index]]
             if is_down and not self._button_down[btn_index]:
                 self._button_pressed[btn_index] = True
 

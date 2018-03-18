@@ -24,8 +24,10 @@ class GameControllerManager:
 
     @property
     def num_joysticks(self):
+        self._num_joysticks = sdl2.joystick.SDL_NumJoysticks()
         return self._num_joysticks
 
+    @classmethod
     def load_joysticks_database(cls, filename):
         # Use a configurations DB file, e.g. https://github.com/gabomdq/SDL_GameControllerDB
         num_entries = sdl2.SDL_GameControllerAddMappingsFromFile(str.encode(filename))
