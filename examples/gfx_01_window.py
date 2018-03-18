@@ -7,8 +7,8 @@ from mgl2d.graphics.screen import Screen
 logging.basicConfig(level=logging.INFO)
 
 app = App()
-screen = Screen(800, 600, 'Test')
-screen.print_info()
+main_screen = Screen(800, 600, 'Test')
+main_screen.print_info()
 
 
 def draw_frame(screen):
@@ -19,4 +19,4 @@ def update_frame(delta_ms):
     pass
 
 
-app.run(screen, draw_frame, update_frame)
+app.run(main_screen, draw_frame, update_frame)

@@ -11,8 +11,8 @@ from mgl2d.math.vector2 import Vector2
 logging.basicConfig(level=logging.INFO)
 
 app = App()
-screen = Screen(800, 600, 'Quad drawable')
-screen.print_info()
+main_screen = Screen(800, 600, 'Quad drawable')
+main_screen.print_info()
 
 quads = []
 for y in range(3):
@@ -40,9 +40,10 @@ quads[7].scale = Vector2(0.8, 0.8)
 # Stretched
 quads[8].scale = Vector2(0.5, 1.2)
 
+
 def draw_frame(screen):
-    for quad in quads:
-        quad.draw(screen)
+    for q in quads:
+        q.draw(screen)
 
 
 animation_angle = 0
@@ -59,4 +60,4 @@ def update_frame(delta_ms):
     quads[11].angle = animation_angle
 
 
-app.run(screen, draw_frame, update_frame)
+app.run(main_screen, draw_frame, update_frame)

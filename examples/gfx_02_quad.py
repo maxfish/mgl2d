@@ -9,8 +9,8 @@ from mgl2d.graphics.texture import Texture
 logging.basicConfig(level=logging.INFO)
 
 app = App()
-screen = Screen(800, 600, 'Quad drawable')
-screen.print_info()
+main_screen = Screen(800, 600, 'Quad drawable')
+main_screen.print_info()
 
 # Textured quad centered
 quad = QuadDrawable(400, 300, 200, 200)
@@ -26,4 +26,4 @@ def update_frame(delta_ms):
     return
 
 
-app.run(screen, draw_frame, update_frame)
+app.run(main_screen, draw_frame, update_frame)
