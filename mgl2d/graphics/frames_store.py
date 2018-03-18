@@ -4,7 +4,7 @@ import os
 from collections import OrderedDict
 
 from mgl2d.graphics.texture import Texture
-from mgl2d.math import Rect
+from mgl2d.math.rect import Rect
 from mgl2d.math.vector2 import Vector2
 
 logger = logging.getLogger(__name__)
