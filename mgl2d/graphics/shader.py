@@ -49,6 +49,18 @@ class Shader(object):
         uniform = self.get_uniform(name)
         glUniformMatrix4fv(uniform, 1, GL_FALSE, matrix)
 
-    def set_uniform_float(self, name, value):
+    def set_uniform_1f(self, name, value):
         uniform = self.get_uniform(name)
         glUniform1f(uniform, value)
+
+    def set_uniform_2f(self, name, v1, v2):
+        uniform = self.get_uniform(name)
+        glUniform2f(uniform, v1, v2)
+
+    def set_uniform_3f(self, name, v1, v2, v3):
+        uniform = self.get_uniform(name)
+        glUniform3f(uniform, v1, v2, v3)
+
+    def set_uniform_4f(self, name, v1, v2, v3, v4):
+        uniform = self.get_uniform(name)
+        glUniform4f(uniform, v1, v2, v3, v4)
