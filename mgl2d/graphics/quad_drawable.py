@@ -236,7 +236,6 @@ class QuadDrawable:
 
         void main() {
             color = texture(tex, uv_out);
-            color.a = 0.5;
         }
         """
 
