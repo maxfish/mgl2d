@@ -1,7 +1,7 @@
 import numpy as np
 from OpenGL.GL import *
 
-from mgl2d.graphics.shader import Shader
+from mgl2d.graphics.shader_program import ShaderProgram
 from mgl2d.math.matrix4 import Matrix4
 from mgl2d.math.vector2 import Vector2
 
@@ -239,4 +239,4 @@ class QuadDrawable:
         }
         """
 
-        self._default_shader = Shader(vertex_shader, fragment_shader)
+        self._default_shader = ShaderProgram.from_sources(vert_source=vertex_shader, frag_source=fragment_shader)
