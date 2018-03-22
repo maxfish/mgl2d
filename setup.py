@@ -20,7 +20,7 @@ LONGDESCRIPTION = 'See the README.md file on GitHub for more information.'
 URL = 'https://github.com/maxfish/mgl2d'
 EMAIL = 'massimiliano.pesce@gmail.com'
 AUTHOR = 'Massimiliano Pesce'
-VERSION = '0.9.6'
+VERSION = '0.9.7'
 
 # What packages are required for this module to be executed?
 REQUIRED = [
@@ -87,12 +87,13 @@ setup(
     install_requires=REQUIRED,
     include_package_data=True,
     license='MIT',
+    python_requires='>=3.6',
     classifiers=[
         # Trove classifiers
         # Full list at https://pypi.python.org/pypi?%3Aaction=list_classifiers
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 3.6',
-        'Development Status :: 4 - Beta',
+        'Development Status :: 3 - Alpha',
         'Topic :: Software Development :: Libraries',
     ],
     # $ setup.py publish support.
