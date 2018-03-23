@@ -128,7 +128,7 @@ class QuadDrawable:
     @angle.setter
     def angle(self, value):
         self._angle = value
-        self._m_rotation = Matrix4.rotate(self._angle)
+        self._m_rotation = Matrix4.rotate_z(self._angle)
         self._is_transform_invalid = True
 
     @property
@@ -200,7 +200,7 @@ class QuadDrawable:
         self._m_translation = Matrix4.translate(self._pos.x, self._pos.y, 0)
         self._m_size = Matrix4.scale(self._size.x, self._size.y, 1)
         self._m_anchor = Matrix4.translate(-self._anchor.x, -self._anchor.y, 0)
-        self._m_rotation = Matrix4.rotate(self._angle)
+        self._m_rotation = Matrix4.rotate_z(self._angle)
         self._m_scale = Matrix4.scale(self._scale.x, self._scale.y, 1)
 
     def _compute_transform(self):

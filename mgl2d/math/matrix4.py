@@ -40,9 +40,8 @@ class Matrix4(object):
             [0, 0, 0, 1]
         ], dtype=numpy.float))
 
-    # TODO: This method should be named rotate_z
     @staticmethod
-    def rotate(degree):
+    def rotate_z(degree):
         radians = math.radians(degree)
         z_sin = math.sin(radians)
         z_cos = math.cos(radians)
