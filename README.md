@@ -1,7 +1,6 @@
 # MGL2D
 
-MGL2D (Modern GL 2D) is a simple library to give access to modern OpenGL (v4.1) to Python games.<br/>
-by Massimiliano Pesce
+MGL2D (Modern GL 2D) is a simple library to give access to modern OpenGL to Python games.<br/>
 
 MGL2D is licensed under the terms of the MIT License.
 See LICENSE for details of the usage license granted to you for this code.
@@ -9,13 +8,20 @@ See LICENSE for details of the usage license granted to you for this code.
 
 ## HIGHLIGHTS
 
-* Super easy setup
-* It uses PyOpenGL and SDL2
-* Supports TMX maps (from Tiled editor)
-* Supports sprite-based animations
-* Full-screen post-processing made easy!
-* Basic shader support
-* Input handling: keyboard and joysticks (via SDL2)
+* Based on [PyOpenGL](http://pyopengl.sourceforge.net) and [SDL2](www.libsdl.org)
+* Super easy setup: create a window and a game loop in less than 10 lines of code
+* Shader support: Vertex, Geometry, Fragment
+* Textures: RGB/RGBA support via Pillow
+* Input handling: keyboard and joysticks
+* Multi-step fullscreen post-processing made easy!
+* Basic support for shapes: lines, polylines and [approximated] circles
+* Support for 2D sprite-based animations
+* Support for [Tiled](http://www.mapeditor.org/) 2D maps (TMX)
+* Developed and tested on MacOS using OpenGL 4.1
+
+## TODO
+
+* Support for joysticks hot-plugging
 
 ## INSTALL
 `pip install mgl2d`
@@ -36,8 +42,3 @@ MGL2D is hosted on Github (https://github.com/maxfish/mgl2d). You can check out 
 ```
 git clone https://github.com/maxfish/mgl2d.git mgl2d
 ```
-
-
-### NOTES
-
-The library has been developed and tested on MacOS.
