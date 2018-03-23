@@ -20,12 +20,12 @@ LONGDESCRIPTION = 'See the README.md file on GitHub for more information.'
 URL = 'https://github.com/maxfish/mgl2d'
 EMAIL = 'massimiliano.pesce@gmail.com'
 AUTHOR = 'Massimiliano Pesce'
-VERSION = '0.9.7'
+VERSION = '0.9.8'
 
 # What packages are required for this module to be executed?
 REQUIRED = [
-    'numpy == 1.13.0',
-    'Pillow == 4.1.1',
+    'numpy == 1.14.0',
+    'Pillow == 5.0.0',
     'PyOpenGL == 3.1.0',
     'PySDL2 == 0.9.6',
     'PyTMX == 3.21.1'
@@ -91,10 +91,13 @@ setup(
     classifiers=[
         # Trove classifiers
         # Full list at https://pypi.python.org/pypi?%3Aaction=list_classifiers
-        'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 3.6',
         'Development Status :: 3 - Alpha',
+        'License :: OSI Approved :: MIT License',
+        'Intended Audience :: Developers',
+        'Programming Language :: Python :: 3.6',
         'Topic :: Software Development :: Libraries',
+        'Topic :: Games/Entertainment',
+        'Topic :: Multimedia :: Graphics',
     ],
     # $ setup.py publish support.
     cmdclass={
