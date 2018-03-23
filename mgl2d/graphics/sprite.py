@@ -3,6 +3,7 @@ from mgl2d.graphics.quad_drawable import QuadDrawable
 from mgl2d.math.vector2 import Vector2
 
 
+# NOTE: This class needs to be tested and updated
 class Sprite:
     DEBUG = False
 

@@ -10,6 +10,7 @@ from mgl2d.math.vector2 import Vector2
 logger = logging.getLogger(__name__)
 
 
+# NOTE: This class needs to be tested and updated
 class FramesStore:
     DEFAULT_FPS = 30
     FLAG_FLIP_X = 1
