@@ -34,7 +34,7 @@ class Shapes:
         self._circle_program.set_uniform_2f('center', center_x, center_y)
         self._circle_program.set_uniform_1f('radius', radius)
         self._circle_program.set_uniform_1i('num_segments', num_segments)
-        self._circle_program.set_uniform_1i('start_angle', start_angle)
+        self._circle_program.set_uniform_1f('start_angle', start_angle)
         self._circle_program.set_uniform_4f('color', color.r, color.g, color.b, color.a)
         # Passing the dummy VAO
         glBindVertexArray(self._dummy_vao)
@@ -50,8 +50,8 @@ class Shapes:
         uniform mat4 projection;
         uniform vec2 center;
         uniform float radius;
+        uniform float start_angle;
         uniform int num_segments;
-        uniform int start_angle;
 
         const float PI = 3.14159265359;
                 

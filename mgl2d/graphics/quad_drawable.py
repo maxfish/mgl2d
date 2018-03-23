@@ -15,7 +15,7 @@ class QuadDrawable:
         self._size = Vector2(size_x, size_y)
         # Anchor point
         self._anchor = Vector2(0, 0)
-        # Angle to rotate around the anchor (degrees)
+        # Angle to rotate around the anchor (radians)
         self._angle = angle
         # Scale to apply to the drawable (1.0 == 100%)
         self._scale = Vector2(scale_x, scale_y)

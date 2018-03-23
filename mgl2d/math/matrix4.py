@@ -41,8 +41,7 @@ class Matrix4(object):
         ], dtype=numpy.float))
 
     @staticmethod
-    def rotate_z(degree):
-        radians = math.radians(degree)
+    def rotate_z(radians):
         z_sin = math.sin(radians)
         z_cos = math.cos(radians)
         return Matrix4(numpy.array([

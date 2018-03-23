@@ -32,7 +32,7 @@ def draw_frame(screen):
 
 
 def update_frame(delta_ms):
-    quad.angle += 0.1
+    quad.angle += delta_ms / 1000
 
 
 app.run(main_screen, draw_frame, update_frame)

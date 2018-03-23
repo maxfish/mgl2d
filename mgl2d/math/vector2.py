@@ -43,8 +43,7 @@ class Vector2(object):
         self._v[1] /= length
 
     def angle_to(self, vector):
-        angle = (math.atan2(vector.y, vector.x) - math.atan2(self._v[1], self._v[0]))
-        return math.degrees(angle)
+        return math.atan2(vector.y, vector.x) - math.atan2(self._v[1], self._v[0])
 
     def direction(self):
         length = math.hypot(self._v[0], self._v[1])

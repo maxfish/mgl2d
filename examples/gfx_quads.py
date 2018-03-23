@@ -30,9 +30,9 @@ quads[4].scale = Vector2(0.8, 0.8)
 # Scaled bigger
 quads[5].scale = Vector2(1.2, 1.2)
 # Rotated 45 degrees
-quads[6].angle = 45
+quads[6].angle = math.pi / 4
 # Rotated 22 degrees and scaled to 50%
-quads[7].angle = 22
+quads[7].angle = math.pi / 8
 quads[7].scale = Vector2(0.8, 0.8)
 # Stretched
 quads[8].scale = Vector2(0.5, 1.2)
@@ -44,13 +44,12 @@ def draw_frame(screen):
 
 
 animation_angle = 0
-animation_scale = 0
 
 
 def update_frame(delta_ms):
-    global animation_scale, animation_angle
-    animation_angle += 0.4
-    animation_scale = math.fabs(math.sin(math.radians(animation_angle * 2)))
+    global animation_angle
+    animation_angle += delta_ms / 1000
+    animation_scale = math.fabs(math.sin(animation_angle * 2))
     quads[9].scale = Vector2(animation_scale, animation_scale)
     quads[10].angle = animation_angle
     quads[11].scale = Vector2(animation_scale, animation_scale)
