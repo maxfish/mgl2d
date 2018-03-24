@@ -41,18 +41,18 @@ class QuadDrawable:
         # Vertices
         self._vbo = glGenBuffers(1)
         glBindBuffer(GL_ARRAY_BUFFER, self._vbo)
-        self._vertices = np.array([0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0], dtype=np.float32)
+        self._vertices = np.array([0, 0, 0, 1, 1, 1, 1, 0], dtype=np.int16)
         glBufferData(GL_ARRAY_BUFFER, self._vertices.nbytes, self._vertices, GL_STATIC_DRAW)
         glEnableVertexAttribArray(0)
-        glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, None)
+        glVertexAttribPointer(0, 2, GL_UNSIGNED_SHORT, GL_FALSE, 0, None)
 
         # Texture coordinates
         self._vbo_uvs = glGenBuffers(1)
         glBindBuffer(GL_ARRAY_BUFFER, self._vbo_uvs)
-        self._texture_coordinates = np.array([0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0], dtype=np.float32)
+        self._texture_coordinates = np.array([0, 0, 0, 1, 1, 1, 1, 0], dtype=np.int16)
         glBufferData(GL_ARRAY_BUFFER, self._texture_coordinates.nbytes, self._texture_coordinates, GL_STATIC_DRAW)
         glEnableVertexAttribArray(1)
-        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, None)
+        glVertexAttribPointer(1, 2, GL_UNSIGNED_SHORT, GL_FALSE, 0, None)
 
         glBindVertexArray(0)
         if self._default_shader is None:
@@ -81,7 +81,7 @@ class QuadDrawable:
             self._shader.set_uniform_matrix4('projection', screen.projection_matrix.m)
 
         glBindVertexArray(self._vao)
-        glDrawArrays(GL_TRIANGLE_STRIP, 0, len(self._vertices))
+        glDrawArrays(GL_TRIANGLE_FAN, 0, len(self._vertices))
         glBindVertexArray(0)
 
         if self._texture is not None:
@@ -220,7 +220,7 @@ class QuadDrawable:
         out vec2 uv_out;
 
         void main() {
-            vec4 vertex_world = model * vec4(vertex, 1, 1);
+            vec4 vertex_world = model * vec4(vertex, 0, 1);
             gl_Position = projection * vertex_world;
             uv_out = uv;
         }
