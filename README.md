@@ -15,6 +15,7 @@ See LICENSE for details of the usage license granted to you for this code.
 * Input handling: keyboard and joysticks
 * Multi-step fullscreen post-processing made easy!
 * Basic support for shapes: lines, polylines and [approximated] circles
+* Basic support of bitmap fonts in [BMFont format](http://www.angelcode.com/products/bmfont/doc/file_format.html)
 * Support for 2D sprite-based animations
 * Support for [Tiled](http://www.mapeditor.org/) 2D maps (TMX)
 * Developed and tested on MacOS using OpenGL 4.1
