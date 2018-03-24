@@ -164,7 +164,7 @@ class Font:
             c = font.get_char(char)
             self._quad.texture = self._page_textures[font_size][c.page_index]
             self._quad.size = Vector2(c.width, c.height) * scale
-            self._quad.pos = Vector2(x, y + c.offset_y * scale)
+            self._quad.pos = Vector2(x + c.offset_x * scale, y + c.offset_y * scale)
             self._character_program.bind()
             self._character_program.set_uniform_2f('area_pos', c.x / font.page_width, c.y / font.page_height)
             self._character_program.set_uniform_2f('area_size', c.width / font.page_width, c.height / font.page_height)
