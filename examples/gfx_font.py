@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-import math
 
 from mgl2d.app import App
 from mgl2d.graphics.font import Font
