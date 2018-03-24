@@ -23,7 +23,7 @@ class CharDef:
 class BMFontDef:
     def __init__(self, filename):
         self._page_files = []
-        self._char_defs = {}
+        self._char_definitions = {}
         self._parse_file(filename)
 
     @property
@@ -51,13 +51,13 @@ class BMFontDef:
         return self._page_files
 
     def get_char(self, letter):
-        return self._char_defs[letter]
+        return self._char_definitions[letter]
 
     def extents_for_char(self, char):
         oc = ord(char)
-        if oc not in self._char_defs:
+        if oc not in self._char_definitions:
             return 0, 0
-        c = self._char_defs[oc]
+        c = self._char_definitions[oc]
         width = c.advance_x
         height = c.height + c.offset_y
         return width, height
@@ -102,7 +102,6 @@ class BMFontDef:
         self._page_files = [''] * int(data['pages'])
 
     def _parse_page(self, data):
-        # page id=0 file="ProstoOne.png"
         self._page_files[int(data['id'])] = data['file'].replace('"', '')
 
     def _parse_char(self, data):
@@ -120,7 +119,7 @@ class BMFontDef:
         char.letter = data['letter'].replace('"', '')
         if char.letter == 'space':
             char.letter = ' '
-        self._char_defs[char.letter] = char
+        self._char_definitions[char.letter] = char
 
     def _tokenize_line(self, line):
         line = line.splitlines()[0]
@@ -131,12 +130,12 @@ class BMFontDef:
         tokens = []
         for part in line.split('='):
             tokens.extend(part.rsplit(' ', 1))
-        cmd, tokens = tokens[0], tokens[1:]
+        section, tokens = tokens[0], tokens[1:]
 
         for k, v in zip(tokens[::2], tokens[1::2]):
             data[k] = v
 
-        return cmd, data
+        return section, data
 
 
 # Supports multiple font files with unique sizes
