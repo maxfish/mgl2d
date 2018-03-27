@@ -13,6 +13,7 @@ class App(object):
         self._running = False
         self._screen = None
         self._fps = DEFAULT_FPS
+        self._current_fps = 0
         self._frame_time_ms = 1000 / DEFAULT_FPS
         logger.info(
             f'SDL v{sdl2.SDL_MAJOR_VERSION}.{sdl2.SDL_MINOR_VERSION}.{sdl2.SDL_PATCHLEVEL} | PySDL v{sdl2.__version__}'
@@ -37,17 +38,18 @@ class App(object):
             # Adjust the loop speed based on the time passed
             current_time = sdl2.SDL_GetPerformanceCounter()
             delta_time_ms = (current_time - old_time) / timer_resolution
+            old_time = current_time
 
             time_accumulator_ms += delta_time_ms
             while time_accumulator_ms > self._frame_time_ms:
                 update_func(delta_time_ms)
                 time_accumulator_ms -= self._frame_time_ms
-            old_time = current_time
 
             # Update the screen
             screen.begin_update()
             draw_func(screen)
             screen.end_update()
+            self._current_fps = 1000 / delta_time_ms
 
         self.stop()
 

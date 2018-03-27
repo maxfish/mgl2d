@@ -11,6 +11,8 @@ class ShaderType(Enum):
 
 
 class ShaderProgram(object):
+    _current_shader = -1
+
     def __init__(self):
         self._uniforms = {}
         self._program_id = None
@@ -73,18 +75,21 @@ class ShaderProgram(object):
         glLinkProgram(self._program_id)
 
     def bind(self):
-        glUseProgram(self._program_id)
+        if self._current_shader != self._program_id:
+            glUseProgram(self._program_id)
+            self._current_shader = self._program_id
 
     def unbind(self):
+        self._current_shader = 0
         glUseProgram(0)
 
     def get_uniform(self, uniform_name):
-        uniform = self._uniforms.get(uniform_name)
-        if not uniform:
+        if uniform_name not in self._uniforms:
             uniform = glGetUniformLocation(self._program_id, uniform_name)
             self._uniforms[uniform_name] = uniform
+            return uniform
 
-        return uniform
+        return self._uniforms[uniform_name]
 
     def set_uniform_matrix4(self, uniform_name, matrix):
         uniform = self.get_uniform(uniform_name)

@@ -26,13 +26,14 @@ class QuadDrawable:
         self._texture = None
         self._shader = None
 
-        self._m_translation = None
-        self._m_size = None
-        self._m_rotation = None
-        self._m_scale = None
-        self._m_anchor = None
-        self._m_transform = None
+        self._m_translation = Matrix4()
+        self._m_size = Matrix4()
+        self._m_rotation = Matrix4()
+        self._m_scale = Matrix4()
+        self._m_anchor = Matrix4()
+        self._m_transform = Matrix4()
         self._is_transform_invalid = True
+        self._is_transform_updated = True
         self._rebuild_matrices()
 
         self._vao = glGenVertexArrays(1)
@@ -55,9 +56,9 @@ class QuadDrawable:
         glVertexAttribPointer(1, 2, GL_UNSIGNED_SHORT, GL_FALSE, 0, None)
 
         glBindVertexArray(0)
-        if self._default_shader is None:
-            self._setup_default_shader()
-        self.shader = self._default_shader
+        # if self._default_shader is None:
+        #     self._setup_default_shader()
+        self.shader = self._setup_default_shader()
 
     def size_from_texture(self):
         self.size = Vector2(self._texture.width, self._texture.height)
@@ -71,22 +72,30 @@ class QuadDrawable:
     def scale_to_texture_size(self):
         self.scale = self.texture.size
 
+    first = True
     def draw(self, screen):
         if self._texture is not None:
             self._texture.bind()
 
         if self._shader is not None:
             self._shader.bind()
-            self._shader.set_uniform_matrix4('model', self.transform_matrix.m)
-            self._shader.set_uniform_matrix4('projection', screen.projection_matrix.m)
+            transform_matrix = None
+            if self._is_transform_invalid:
+                transform_matrix = self.transform_matrix.m
+            if self._is_transform_updated:
+                self._shader.set_uniform_matrix4('model', transform_matrix)
+                self._is_transform_updated = False
+            if self.first:
+                self._shader.set_uniform_matrix4('projection', screen.projection_matrix.m)
+                self.first = False
 
         glBindVertexArray(self._vao)
         glDrawArrays(GL_TRIANGLE_FAN, 0, len(self._vertices))
-        glBindVertexArray(0)
-
-        if self._texture is not None:
-            self._texture.unbind()
-
+        # glBindVertexArray(0)
+        #
+        # if self._texture is not None:
+        #     self._texture.unbind()
+        #
         if self._shader is not None:
             self._shader.unbind()
 
@@ -98,7 +107,7 @@ class QuadDrawable:
     @pos.setter
     def pos(self, value):
         self._pos = value
-        self._m_translation = Matrix4.translate(self._pos.x, self._pos.y, 0)
+        self._m_translation.set_translate(self._pos.x, self._pos.y, 0)
         self._is_transform_invalid = True
 
     @property
@@ -108,7 +117,7 @@ class QuadDrawable:
     @anchor.setter
     def anchor(self, vector2):
         self._anchor = vector2
-        self._m_anchor = Matrix4.translate(-self._anchor.x, -self._anchor.y, 0)
+        self._m_anchor.set_translate(-self._anchor.x, -self._anchor.y, 0)
         self._is_transform_invalid = True
 
     @property
@@ -118,7 +127,7 @@ class QuadDrawable:
     @size.setter
     def size(self, value):
         self._size = value
-        self._m_size = Matrix4.scale(self._size.x, self._size.y, 1)
+        self._m_size.set_scale(self._size.x, self._size.y, 1)
         self._is_transform_invalid = True
 
     @property
@@ -128,7 +137,7 @@ class QuadDrawable:
     @angle.setter
     def angle(self, value):
         self._angle = value
-        self._m_rotation = Matrix4.rotate_z(self._angle)
+        self._m_rotation.set_rotate_z(self._angle)
         self._is_transform_invalid = True
 
     @property
@@ -158,7 +167,7 @@ class QuadDrawable:
         self._scale = value
         flip_x = -1 if self._flip_x else 1
         flip_y = -1 if self._flip_y else 1
-        self._m_scale = Matrix4.scale(self._scale.x * flip_x, self._scale.y * flip_y, 1)
+        self._m_scale.set_scale(self._scale.x * flip_x, self._scale.y * flip_y, 1)
         self._is_transform_invalid = True
 
     @property
@@ -197,15 +206,17 @@ class QuadDrawable:
 
     # Private methods
     def _rebuild_matrices(self):
-        self._m_translation = Matrix4.translate(self._pos.x, self._pos.y, 0)
-        self._m_size = Matrix4.scale(self._size.x, self._size.y, 1)
-        self._m_anchor = Matrix4.translate(-self._anchor.x, -self._anchor.y, 0)
-        self._m_rotation = Matrix4.rotate_z(self._angle)
-        self._m_scale = Matrix4.scale(self._scale.x, self._scale.y, 1)
+        self._m_translation.set_translate(self._pos.x, self._pos.y, 0)
+        self._m_size.set_scale(self._size.x, self._size.y, 1)
+        self._m_anchor.set_translate(-self._anchor.x, -self._anchor.y, 0)
+        self._m_rotation.set_rotate_z(self._angle)
+        self._m_scale.set_scale(self._scale.x, self._scale.y, 1)
+        self._is_transform_updated = True
 
     def _compute_transform(self):
         self._m_transform = self._m_translation * self._m_rotation * self._m_scale * self._m_anchor * self._m_size
         self._is_transform_invalid = False
+        self._is_transform_updated = True
 
     def _setup_default_shader(self):
         vertex_shader = """
@@ -220,8 +231,7 @@ class QuadDrawable:
         out vec2 uv_out;
 
         void main() {
-            vec4 vertex_world = model * vec4(vertex, 0, 1);
-            gl_Position = projection * vertex_world;
+            gl_Position = projection * model * vec4(vertex, 0, 1);
             uv_out = uv;
         }
         """
@@ -239,4 +249,4 @@ class QuadDrawable:
         }
         """
 
-        self._default_shader = ShaderProgram.from_sources(vert_source=vertex_shader, frag_source=fragment_shader)
+        return ShaderProgram.from_sources(vert_source=vertex_shader, frag_source=fragment_shader)

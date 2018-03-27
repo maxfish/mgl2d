@@ -8,7 +8,7 @@ class Vector2(object):
 
     def __init__(self, x=0.0, y=0.0):
         # To simplify the matrices operations the vector has 4 components
-        self._v = numpy.array([x, y, 0, 0], dtype=numpy.float)
+        self._v = numpy.array([x, y, 0, 0], dtype=numpy.float32)
 
     @property
     def v(self):

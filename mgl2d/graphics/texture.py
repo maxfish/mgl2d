@@ -10,6 +10,8 @@ logger = logging.getLogger(__name__)
 
 
 class Texture(object):
+    _current_texture = -1
+
     @classmethod
     def load_from_file(cls, filename, mode=GL_RGBA):
         image = Image.open(filename)
@@ -76,9 +78,12 @@ class Texture(object):
         self.texture_id = 0
 
     def bind(self):
-        glBindTexture(GL_TEXTURE_2D, self.texture_id)
+        if self._current_texture != self.texture_id:
+            glBindTexture(GL_TEXTURE_2D, self.texture_id)
+            self._current_texture = self.texture_id
 
     def unbind(self):
+        self._current_texture = 0
         glBindTexture(GL_TEXTURE_2D, 0)
 
     @property
