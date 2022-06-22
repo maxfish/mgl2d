@@ -24,7 +24,7 @@ VERSION = '0.9.9'
 
 # What packages are required for this module to be executed?
 REQUIRED = [
-    'numpy == 1.21.0',
+    'numpy == 1.22.0',
     'Pillow == 9.0.1',
     'PyOpenGL == 3.1.0',
     'PySDL2 == 0.9.6',
